@@ -1,0 +1,7 @@
+<h1>All Issuances</h1>
+<% @issuances.each do |issuance|%>
+    <p>Name : <%=issuance.name%></p>
+    <p>Max Amount : <%=issuance.max_amount%></p>
+    <p>Start Date : <%=issuance.start_date%></p>
+    <p>End Date : <%=issuance.end_date%></p>
+<% end %>
