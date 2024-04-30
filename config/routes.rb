@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Defines the root path route ("/")
-  root "investments#index"
+  root "admin/dashboard#index"
 
   # Defines the resources route for the investments controller
   resources :investments
