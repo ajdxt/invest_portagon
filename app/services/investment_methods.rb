@@ -12,7 +12,6 @@ module InvestmentMethods
   end
 
   def remaining_amount_percent
-    binding.pry
-    (remaining_amount.to_f / max_amount.to_f).round(2) * 100
+    ((remaining_amount.to_f / max_amount.to_f) * 100).round(2)
   end
 end

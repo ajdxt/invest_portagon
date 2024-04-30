@@ -10,8 +10,37 @@ ActiveAdmin.register Issuance do
     column :max_amount
     column :start_date
     column :end_date
-    column "Remaining Amount (%)", :remaining_amount_percentage
+    column "Remaining Amount (%)" do |issuance|
+      "#{issuance.remaining_amount_percent}% or #{issuance.remaining_amount} / #{issuance.max_amount}"
+    end
+
+    column :investable?
     actions
+  end
+
+  show do
+    attributes_table do
+      row :name
+      row :max_amount
+      row :start_date
+      row :end_date
+      row :remaining_amount
+      row :remaining_amount_percent
+      row :investable?
+      row :created_at
+      row :updated_at
+      row :investments do |issuance|
+        columns do
+          column do
+            table_for issuance.investments do
+              column :user
+              column :amount
+              column :created_at
+            end
+          end
+        end
+      end
+    end
   end
 
   form do |f|
