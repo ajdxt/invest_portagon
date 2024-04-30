@@ -1,6 +1,5 @@
-from ruby:3.2.2
+from ruby:3.2.2 AS base
 
-RUN apt-get update -qq && apt-get install -y build-essential libpq-dev nodejs
 WORKDIR /invest-portagon
 
 COPY Gemfile /invest-portagon/Gemfile
@@ -11,4 +10,4 @@ COPY . /invest-portagon
 
 EXPOSE 3001
 
-CMD ["rails", "server", "-p", "3001"]
+CMD ["bundle", "exec", "puma", "-C", "config/puma.rb", "-p", "3001"]
