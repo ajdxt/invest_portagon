@@ -11,22 +11,12 @@
 #  updated_at :datetime         not null
 #
 class Issuance < ApplicationRecord
+  include InvestmentMethods
   has_many :investments
   has_many :users, through: :investments
 
   validates :name, presence: true
-  validates :max_amount, presence: true, numericality: { greater_than: 0 }
+  validates :max_amount, presence: true, numericality: { greater_than_or_equal_to: 0 }
   validates :start_date, presence: true
-  validates :end_date, presence: true
-  validate :validate_start_date_before_end_date
-
-  def validate_start_date_before_end_date
-    return unless start_date && end_date
-
-    errors.add(:start_date, 'must be before end date') if start_date >= end_date
-  end
-
-  def in_period?(date)
-    start_date <= date && end_date >= date
-  end
+  validates :end_date, presence: true, comparison: { greater_than: :start_date }
 end

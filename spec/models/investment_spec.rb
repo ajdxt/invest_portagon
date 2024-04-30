@@ -61,4 +61,9 @@ RSpec.describe Investment, type: :model do
     investment_1.created_at = Date.today
     expect(investment_1).to_not be_valid
   end
+
+  it "is not valid if the investment amount is greater than the remaining amount" do
+    investment_1.amount = 1500
+    expect(investment_1).to_not be_valid
+  end
 end
